@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kovacs-tamas/naturalization.git"
+    "url": "git+https://github.com/kovacs-tamas/capacitor-native-bridge.git"
   },
   "bugs": {
-    "url": "https://github.com/kovacs-tamas/naturalization/issues"
+    "url": "https://github.com/kovacs-tamas/capacitor-native-bridge/issues"
   },
   "keywords": [
     "capacitor",

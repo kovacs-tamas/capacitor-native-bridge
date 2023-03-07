@@ -8,15 +8,40 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 @CapacitorPlugin(name = "CapacitorNativeBridge")
 public class CapacitorNativeBridgePlugin extends Plugin {
+    
+    @PluginMethod
+    public void getConfig(PluginCall call) {
+        Intent intent = bridge.getIntent();
+        JSONObject result = new JSONObject();
 
-    private CapacitorNativeBridge implementation = new CapacitorNativeBridge();
+        try {
+            if (intent.hasExtra("css")) {
+                String css = intent.getExtras().getString("css");
+                result.put("css", css);
+            }
+
+            if (intent.hasExtra("config-json")) {
+                String config = intent.getExtras().getString("config-json");
+                result.put("config", config);
+            }
+
+        } catch (JSONException e) {
+            // some exception handler code.
+        }
+
+
+        call.resolve(result);
+    }
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void deliverResults(PluginCall call) {
+        Intent intent = bridge.getIntent();
+
+        if (intent.hasExtra("config-json")) {
+            MainActivity.callListener(arg);
+        }
 
         JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
         call.resolve(ret);
     }
 }
